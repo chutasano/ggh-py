@@ -7,8 +7,8 @@ np.set_printoptions(threshold=np.inf)
 
 # adapted from https://nathanbrixius.wordpress.com/2013/09/13/generating-random-unimodular-matrices-with-a-column-of-ones/
 def rand_unimod(n):
-    l = np.tril(np.random.randint(-10, 10, size=(n,n))).astype('int64')
-    u = np.triu(np.random.randint(-10, 10, size=(n,n))).astype('int64')
+    l = np.tril(np.random.randint(-5, 5, size=(n,n))).astype('int64')
+    u = np.triu(np.random.randint(-5, 5, size=(n,n))).astype('int64')
     for i in range(0, n):
         l[i, i] = u[i, i] = 1
     return np.dot(l,u)
@@ -25,13 +25,11 @@ dim = len(l)
 B = np.array(l)
 U = rand_unimod(dim)
 
-with open("priv/B.txt", 'w') as f:
-    f.write(B)
-with open("priv/Binv.txt", 'w') as f:
-    f.write(np.linalg.inv(B))
-with open("priv/U.txt", 'w') as f:
-    f.write(U)
-with open("priv/Uinv.txt", 'w') as f:
-    f.write(np.linalg.inv(U))
-with open("pub/UB.txt", 'w') as f:
-    f.write(np.matmul(U,B))
+print B
+print U
+print np.dot(U,B)
+
+np.save("priv/B.npy", B)
+np.save("priv/U.npy", U)
+np.save("pub/UB.npy", np.dot(U, B))
+

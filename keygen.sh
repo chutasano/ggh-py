@@ -1,7 +1,7 @@
 #!/bin/bash
-dim=200
-min=-3
-max=3
+dim=3
+min=-5
+max=5
 
 rm -rf priv pub
 mkdir priv
